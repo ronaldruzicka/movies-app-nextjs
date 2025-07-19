@@ -1,0 +1,14 @@
+{
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always",
+    "source.fixAll.biome": "never",
+    "source.organizeImports": "always"
+  },
+  "biome.enabled": false
+}
