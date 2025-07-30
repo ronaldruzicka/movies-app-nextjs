@@ -10,5 +10,6 @@
     "source.fixAll.biome": "never",
     "source.organizeImports": "always"
   },
+  "editor.formatOnSave": true,
   "biome.enabled": false
 }

@@ -308,161 +308,6 @@ import type {
   ListsCopyData,
   ListsCopyResponses,
 } from './types.gen';
-import {
-  vSearchMovieResponse,
-  vDiscoverMovieResponse,
-  vMovieDetailsResponse,
-  vTvSeriesDetailsResponse,
-  vSearchTvResponse,
-  vSearchMultiResponse,
-  vSearchPersonResponse,
-  vConfigurationDetailsResponse,
-  vTvSeasonDetailsResponse,
-  vTvEpisodeDetailsResponse,
-  vDiscoverTvResponse,
-  vMovieImagesResponse,
-  vTvSeriesImagesResponse,
-  vTvSeasonImagesResponse,
-  vTvEpisodeImagesResponse,
-  vTrendingAllResponse,
-  vTrendingMoviesResponse,
-  vTrendingTvResponse,
-  vMovieAccountStatesResponse,
-  vTvSeriesAccountStatesResponse,
-  vTvEpisodeAccountStatesResponse,
-  vTrendingPeopleResponse,
-  vMovieAlternativeTitlesResponse,
-  vMovieChangesResponse,
-  vMovieCreditsResponse,
-  vMovieExternalIdsResponse,
-  vMovieKeywordsResponse,
-  vMovieListsResponse,
-  vMovieRecommendationsResponse,
-  vMovieReleaseDatesResponse,
-  vMovieReviewsResponse,
-  vMovieSimilarResponse,
-  vMovieTranslationsResponse,
-  vMovieVideosResponse,
-  vMovieWatchProvidersResponse,
-  vMovieDeleteRatingResponse,
-  vMovieAddRatingResponse,
-  vAuthenticationCreateGuestSessionResponse,
-  vAuthenticationCreateRequestTokenResponse,
-  vAuthenticationCreateSessionResponse,
-  vAuthenticationCreateSessionFromV4TokenResponse,
-  vAuthenticationDeleteSessionResponse,
-  vFindByIdResponse,
-  vPersonDetailsResponse,
-  vPersonChangesResponse,
-  vTvSeriesChangesResponse,
-  vPersonImagesResponse,
-  vPersonMovieCreditsResponse,
-  vPersonTvCreditsResponse,
-  vPersonCombinedCreditsResponse,
-  vPersonExternalIdsResponse,
-  vPersonTaggedImagesResponse,
-  vTranslationsResponse,
-  vPersonPopularListResponse,
-  vMoviePopularListResponse,
-  vMovieTopRatedListResponse,
-  vMovieUpcomingListResponse,
-  vMovieNowPlayingListResponse,
-  vTvSeriesAiringTodayListResponse,
-  vTvSeriesOnTheAirListResponse,
-  vTvSeriesPopularListResponse,
-  vTvSeriesTopRatedListResponse,
-  vMovieLatestIdResponse,
-  vTvSeriesLatestIdResponse,
-  vTvSeriesAggregateCreditsResponse,
-  vTvSeriesAlternativeTitlesResponse,
-  vTvSeriesContentRatingsResponse,
-  vTvSeriesCreditsResponse,
-  vTvSeriesEpisodeGroupsResponse,
-  vTvSeriesExternalIdsResponse,
-  vTvSeriesKeywordsResponse,
-  vTvSeriesRecommendationsResponse,
-  vTvSeriesReviewsResponse,
-  vTvSeriesScreenedTheatricallyResponse,
-  vTvSeriesSimilarResponse,
-  vTvSeriesTranslationsResponse,
-  vTvSeriesVideosResponse,
-  vTvSeriesWatchProvidersResponse,
-  vTvSeriesDeleteRatingResponse,
-  vTvSeriesAddRatingResponse,
-  vTvSeasonAccountStatesResponse,
-  vTvSeasonAggregateCreditsResponse,
-  vTvSeasonChangesByIdResponse,
-  vTvSeasonCreditsResponse,
-  vTvSeasonExternalIdsResponse,
-  vTvSeasonTranslationsResponse,
-  vTvSeasonVideosResponse,
-  vTvEpisodeCreditsResponse,
-  vTvEpisodeExternalIdsResponse,
-  vTvEpisodeTranslationsResponse,
-  vTvEpisodeVideosResponse,
-  vTvEpisodeDeleteRatingResponse,
-  vTvEpisodeAddRatingResponse,
-  vAccountDetailsResponse,
-  vAccountListsResponse,
-  vAccountGetFavoritesResponse,
-  vAccountFavoriteTvResponse,
-  vAccountRatedMoviesResponse,
-  vAccountRatedTvResponse,
-  vAccountRatedTvEpisodesResponse,
-  vAccountWatchlistMoviesResponse,
-  vAccountWatchlistTvResponse,
-  vAccountAddFavoriteResponse,
-  vAccountAddToWatchlistResponse,
-  vCertificationMovieListResponse,
-  vCertificationsTvListResponse,
-  vChangesMovieListResponse,
-  vChangesTvListResponse,
-  vChangesPeopleListResponse,
-  vCollectionDetailsResponse,
-  vCollectionImagesResponse,
-  vCollectionTranslationsResponse,
-  vCompanyDetailsResponse,
-  vCompanyAlternativeNamesResponse,
-  vCompanyImagesResponse,
-  vCreditDetailsResponse,
-  vGenreMovieListResponse,
-  vGenreTvListResponse,
-  vGuestSessionRatedMoviesResponse,
-  vGuestSessionRatedTvResponse,
-  vGuestSessionRatedTvEpisodesResponse,
-  vWatchProvidersAvailableRegionsResponse,
-  vWatchProvidersMovieListResponse,
-  vWatchProviderTvListResponse,
-  vKeywordDetailsResponse,
-  vKeywordMoviesResponse,
-  vListDeleteResponse,
-  vListDetailsResponse,
-  vListCheckItemStatusResponse,
-  vListCreateResponse,
-  vListAddMovieResponse,
-  vListRemoveMovieResponse,
-  vListClearResponse,
-  vNetworkDetailsResponse,
-  vDetailsCopyResponse,
-  vAlternativeNamesCopyResponse,
-  vReviewDetailsResponse,
-  vAuthenticationValidateKeyResponse,
-  vTvSeasonWatchProvidersResponse,
-  vConfigurationCountriesResponse,
-  vConfigurationJobsResponse,
-  vConfigurationLanguagesResponse,
-  vConfigurationPrimaryTranslationsResponse,
-  vConfigurationTimezonesResponse,
-  vAuthenticationCreateSessionFromLoginResponse,
-  vPersonLatestIdResponse,
-  vTvEpisodeChangesByIdResponse,
-  vTvEpisodeGroupDetailsResponse,
-  vSearchCompanyResponse,
-  vSearchCollectionResponse,
-  vSearchKeywordResponse,
-  vListsCopyResponse,
-} from './valibot.gen';
-import * as v from 'valibot';
 import { client as _heyApiClient } from './client.gen';
 
 export type Options<
@@ -490,9 +335,6 @@ export const searchMovie = <ThrowOnError extends boolean = false>(
   options: Options<SearchMovieData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<SearchMovieResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vSearchMovieResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -512,9 +354,6 @@ export const discoverMovie = <ThrowOnError extends boolean = false>(
   options?: Options<DiscoverMovieData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).get<DiscoverMovieResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vDiscoverMovieResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -534,9 +373,6 @@ export const movieDetails = <ThrowOnError extends boolean = false>(
   options: Options<MovieDetailsData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<MovieDetailsResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vMovieDetailsResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -556,9 +392,6 @@ export const tvSeriesDetails = <ThrowOnError extends boolean = false>(
   options: Options<TvSeriesDetailsData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<TvSeriesDetailsResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vTvSeriesDetailsResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -578,9 +411,6 @@ export const searchTv = <ThrowOnError extends boolean = false>(
   options: Options<SearchTvData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<SearchTvResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vSearchTvResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -600,9 +430,6 @@ export const searchMulti = <ThrowOnError extends boolean = false>(
   options: Options<SearchMultiData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<SearchMultiResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vSearchMultiResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -622,9 +449,6 @@ export const searchPerson = <ThrowOnError extends boolean = false>(
   options: Options<SearchPersonData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<SearchPersonResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vSearchPersonResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -648,9 +472,6 @@ export const configurationDetails = <ThrowOnError extends boolean = false>(
     unknown,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vConfigurationDetailsResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -670,9 +491,6 @@ export const tvSeasonDetails = <ThrowOnError extends boolean = false>(
   options: Options<TvSeasonDetailsData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<TvSeasonDetailsResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vTvSeasonDetailsResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -692,9 +510,6 @@ export const tvEpisodeDetails = <ThrowOnError extends boolean = false>(
   options: Options<TvEpisodeDetailsData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<TvEpisodeDetailsResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vTvEpisodeDetailsResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -714,9 +529,6 @@ export const discoverTv = <ThrowOnError extends boolean = false>(
   options?: Options<DiscoverTvData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).get<DiscoverTvResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vDiscoverTvResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -736,9 +548,6 @@ export const movieImages = <ThrowOnError extends boolean = false>(
   options: Options<MovieImagesData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<MovieImagesResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vMovieImagesResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -758,9 +567,6 @@ export const tvSeriesImages = <ThrowOnError extends boolean = false>(
   options: Options<TvSeriesImagesData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<TvSeriesImagesResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vTvSeriesImagesResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -780,9 +586,6 @@ export const tvSeasonImages = <ThrowOnError extends boolean = false>(
   options: Options<TvSeasonImagesData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<TvSeasonImagesResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vTvSeasonImagesResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -802,9 +605,6 @@ export const tvEpisodeImages = <ThrowOnError extends boolean = false>(
   options: Options<TvEpisodeImagesData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<TvEpisodeImagesResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vTvEpisodeImagesResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -824,9 +624,6 @@ export const trendingAll = <ThrowOnError extends boolean = false>(
   options: Options<TrendingAllData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<TrendingAllResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vTrendingAllResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -846,9 +643,6 @@ export const trendingMovies = <ThrowOnError extends boolean = false>(
   options: Options<TrendingMoviesData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<TrendingMoviesResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vTrendingMoviesResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -868,9 +662,6 @@ export const trendingTv = <ThrowOnError extends boolean = false>(
   options: Options<TrendingTvData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<TrendingTvResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vTrendingTvResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -890,9 +681,6 @@ export const movieAccountStates = <ThrowOnError extends boolean = false>(
   options: Options<MovieAccountStatesData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<MovieAccountStatesResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vMovieAccountStatesResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -916,9 +704,6 @@ export const tvSeriesAccountStates = <ThrowOnError extends boolean = false>(
     unknown,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vTvSeriesAccountStatesResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -942,9 +727,6 @@ export const tvEpisodeAccountStates = <ThrowOnError extends boolean = false>(
     unknown,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vTvEpisodeAccountStatesResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -964,9 +746,6 @@ export const trendingPeople = <ThrowOnError extends boolean = false>(
   options: Options<TrendingPeopleData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<TrendingPeopleResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vTrendingPeopleResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -990,9 +769,6 @@ export const movieAlternativeTitles = <ThrowOnError extends boolean = false>(
     unknown,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vMovieAlternativeTitlesResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -1012,9 +788,6 @@ export const movieChanges = <ThrowOnError extends boolean = false>(
   options: Options<MovieChangesData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<MovieChangesResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vMovieChangesResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -1033,9 +806,6 @@ export const movieCredits = <ThrowOnError extends boolean = false>(
   options: Options<MovieCreditsData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<MovieCreditsResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vMovieCreditsResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -1054,9 +824,6 @@ export const movieExternalIds = <ThrowOnError extends boolean = false>(
   options: Options<MovieExternalIdsData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<MovieExternalIdsResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vMovieExternalIdsResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -1075,9 +842,6 @@ export const movieKeywords = <ThrowOnError extends boolean = false>(
   options: Options<MovieKeywordsData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<MovieKeywordsResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vMovieKeywordsResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -1097,9 +861,6 @@ export const movieLists = <ThrowOnError extends boolean = false>(
   options: Options<MovieListsData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<MovieListsResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vMovieListsResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -1122,9 +883,6 @@ export const movieRecommendations = <ThrowOnError extends boolean = false>(
     unknown,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vMovieRecommendationsResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -1144,9 +902,6 @@ export const movieReleaseDates = <ThrowOnError extends boolean = false>(
   options: Options<MovieReleaseDatesData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<MovieReleaseDatesResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vMovieReleaseDatesResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -1166,9 +921,6 @@ export const movieReviews = <ThrowOnError extends boolean = false>(
   options: Options<MovieReviewsData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<MovieReviewsResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vMovieReviewsResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -1188,9 +940,6 @@ export const movieSimilar = <ThrowOnError extends boolean = false>(
   options: Options<MovieSimilarData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<MovieSimilarResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vMovieSimilarResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -1210,9 +959,6 @@ export const movieTranslations = <ThrowOnError extends boolean = false>(
   options: Options<MovieTranslationsData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<MovieTranslationsResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vMovieTranslationsResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -1231,9 +977,6 @@ export const movieVideos = <ThrowOnError extends boolean = false>(
   options: Options<MovieVideosData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<MovieVideosResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vMovieVideosResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -1254,9 +997,6 @@ export const movieWatchProviders = <ThrowOnError extends boolean = false>(
 ) => {
   return (options.client ?? _heyApiClient).get<MovieWatchProvidersResponses, unknown, ThrowOnError>(
     {
-      responseValidator: async (data) => {
-        return await v.parseAsync(vMovieWatchProvidersResponse, data);
-      },
       security: [
         {
           name: 'Authorization',
@@ -1281,9 +1021,6 @@ export const movieDeleteRating = <ThrowOnError extends boolean = false>(
     unknown,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vMovieDeleteRatingResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -1303,9 +1040,6 @@ export const movieAddRating = <ThrowOnError extends boolean = false>(
   options: Options<MovieAddRatingData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).post<MovieAddRatingResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vMovieAddRatingResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -1328,9 +1062,6 @@ export const authenticationCreateGuestSession = <ThrowOnError extends boolean = 
     unknown,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vAuthenticationCreateGuestSessionResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -1353,9 +1084,6 @@ export const authenticationCreateRequestToken = <ThrowOnError extends boolean = 
     unknown,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vAuthenticationCreateRequestTokenResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -1378,9 +1106,6 @@ export const authenticationCreateSession = <ThrowOnError extends boolean = false
     unknown,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vAuthenticationCreateSessionResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -1407,9 +1132,6 @@ export const authenticationCreateSessionFromV4Token = <ThrowOnError extends bool
     unknown,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vAuthenticationCreateSessionFromV4TokenResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -1436,9 +1158,6 @@ export const authenticationDeleteSession = <ThrowOnError extends boolean = false
     unknown,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vAuthenticationDeleteSessionResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -1462,9 +1181,6 @@ export const findById = <ThrowOnError extends boolean = false>(
   options: Options<FindByIdData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<FindByIdResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vFindByIdResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -1484,9 +1200,6 @@ export const personDetails = <ThrowOnError extends boolean = false>(
   options: Options<PersonDetailsData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<PersonDetailsResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vPersonDetailsResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -1506,9 +1219,6 @@ export const personChanges = <ThrowOnError extends boolean = false>(
   options: Options<PersonChangesData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<PersonChangesResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vPersonChangesResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -1528,9 +1238,6 @@ export const tvSeriesChanges = <ThrowOnError extends boolean = false>(
   options: Options<TvSeriesChangesData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<TvSeriesChangesResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vTvSeriesChangesResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -1550,9 +1257,6 @@ export const personImages = <ThrowOnError extends boolean = false>(
   options: Options<PersonImagesData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<PersonImagesResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vPersonImagesResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -1572,9 +1276,6 @@ export const personMovieCredits = <ThrowOnError extends boolean = false>(
   options: Options<PersonMovieCreditsData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<PersonMovieCreditsResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vPersonMovieCreditsResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -1594,9 +1295,6 @@ export const personTvCredits = <ThrowOnError extends boolean = false>(
   options: Options<PersonTvCreditsData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<PersonTvCreditsResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vPersonTvCreditsResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -1620,9 +1318,6 @@ export const personCombinedCredits = <ThrowOnError extends boolean = false>(
     unknown,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vPersonCombinedCreditsResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -1642,9 +1337,6 @@ export const personExternalIds = <ThrowOnError extends boolean = false>(
   options: Options<PersonExternalIdsData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<PersonExternalIdsResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vPersonExternalIdsResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -1664,9 +1356,6 @@ export const personTaggedImages = <ThrowOnError extends boolean = false>(
   options: Options<PersonTaggedImagesData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<PersonTaggedImagesResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vPersonTaggedImagesResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -1686,9 +1375,6 @@ export const translations = <ThrowOnError extends boolean = false>(
   options: Options<TranslationsData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<TranslationsResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vTranslationsResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -1708,9 +1394,6 @@ export const personPopularList = <ThrowOnError extends boolean = false>(
   options?: Options<PersonPopularListData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).get<PersonPopularListResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vPersonPopularListResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -1730,9 +1413,6 @@ export const moviePopularList = <ThrowOnError extends boolean = false>(
   options?: Options<MoviePopularListData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).get<MoviePopularListResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vMoviePopularListResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -1752,9 +1432,6 @@ export const movieTopRatedList = <ThrowOnError extends boolean = false>(
   options?: Options<MovieTopRatedListData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).get<MovieTopRatedListResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vMovieTopRatedListResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -1774,9 +1451,6 @@ export const movieUpcomingList = <ThrowOnError extends boolean = false>(
   options?: Options<MovieUpcomingListData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).get<MovieUpcomingListResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vMovieUpcomingListResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -1800,9 +1474,6 @@ export const movieNowPlayingList = <ThrowOnError extends boolean = false>(
     unknown,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vMovieNowPlayingListResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -1826,9 +1497,6 @@ export const tvSeriesAiringTodayList = <ThrowOnError extends boolean = false>(
     unknown,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vTvSeriesAiringTodayListResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -1852,9 +1520,6 @@ export const tvSeriesOnTheAirList = <ThrowOnError extends boolean = false>(
     unknown,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vTvSeriesOnTheAirListResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -1878,9 +1543,6 @@ export const tvSeriesPopularList = <ThrowOnError extends boolean = false>(
     unknown,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vTvSeriesPopularListResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -1904,9 +1566,6 @@ export const tvSeriesTopRatedList = <ThrowOnError extends boolean = false>(
     unknown,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vTvSeriesTopRatedListResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -1926,9 +1585,6 @@ export const movieLatestId = <ThrowOnError extends boolean = false>(
   options?: Options<MovieLatestIdData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).get<MovieLatestIdResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vMovieLatestIdResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -1948,9 +1604,6 @@ export const tvSeriesLatestId = <ThrowOnError extends boolean = false>(
   options?: Options<TvSeriesLatestIdData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).get<TvSeriesLatestIdResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vTvSeriesLatestIdResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -1974,9 +1627,6 @@ export const tvSeriesAggregateCredits = <ThrowOnError extends boolean = false>(
     unknown,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vTvSeriesAggregateCreditsResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -2000,9 +1650,6 @@ export const tvSeriesAlternativeTitles = <ThrowOnError extends boolean = false>(
     unknown,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vTvSeriesAlternativeTitlesResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -2026,9 +1673,6 @@ export const tvSeriesContentRatings = <ThrowOnError extends boolean = false>(
     unknown,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vTvSeriesContentRatingsResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -2048,9 +1692,6 @@ export const tvSeriesCredits = <ThrowOnError extends boolean = false>(
   options: Options<TvSeriesCreditsData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<TvSeriesCreditsResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vTvSeriesCreditsResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -2074,9 +1715,6 @@ export const tvSeriesEpisodeGroups = <ThrowOnError extends boolean = false>(
     unknown,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vTvSeriesEpisodeGroupsResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -2097,9 +1735,6 @@ export const tvSeriesExternalIds = <ThrowOnError extends boolean = false>(
 ) => {
   return (options.client ?? _heyApiClient).get<TvSeriesExternalIdsResponses, unknown, ThrowOnError>(
     {
-      responseValidator: async (data) => {
-        return await v.parseAsync(vTvSeriesExternalIdsResponse, data);
-      },
       security: [
         {
           name: 'Authorization',
@@ -2120,9 +1755,6 @@ export const tvSeriesKeywords = <ThrowOnError extends boolean = false>(
   options: Options<TvSeriesKeywordsData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<TvSeriesKeywordsResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vTvSeriesKeywordsResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -2145,9 +1777,6 @@ export const tvSeriesRecommendations = <ThrowOnError extends boolean = false>(
     unknown,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vTvSeriesRecommendationsResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -2167,9 +1796,6 @@ export const tvSeriesReviews = <ThrowOnError extends boolean = false>(
   options: Options<TvSeriesReviewsData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<TvSeriesReviewsResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vTvSeriesReviewsResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -2193,9 +1819,6 @@ export const tvSeriesScreenedTheatrically = <ThrowOnError extends boolean = fals
     unknown,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vTvSeriesScreenedTheatricallyResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -2215,9 +1838,6 @@ export const tvSeriesSimilar = <ThrowOnError extends boolean = false>(
   options: Options<TvSeriesSimilarData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<TvSeriesSimilarResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vTvSeriesSimilarResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -2241,9 +1861,6 @@ export const tvSeriesTranslations = <ThrowOnError extends boolean = false>(
     unknown,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vTvSeriesTranslationsResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -2263,9 +1880,6 @@ export const tvSeriesVideos = <ThrowOnError extends boolean = false>(
   options: Options<TvSeriesVideosData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<TvSeriesVideosResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vTvSeriesVideosResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -2289,9 +1903,6 @@ export const tvSeriesWatchProviders = <ThrowOnError extends boolean = false>(
     unknown,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vTvSeriesWatchProvidersResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -2314,9 +1925,6 @@ export const tvSeriesDeleteRating = <ThrowOnError extends boolean = false>(
     unknown,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vTvSeriesDeleteRatingResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -2336,9 +1944,6 @@ export const tvSeriesAddRating = <ThrowOnError extends boolean = false>(
   options: Options<TvSeriesAddRatingData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).post<TvSeriesAddRatingResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vTvSeriesAddRatingResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -2362,9 +1967,6 @@ export const tvSeasonAccountStates = <ThrowOnError extends boolean = false>(
     unknown,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vTvSeasonAccountStatesResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -2388,9 +1990,6 @@ export const tvSeasonAggregateCredits = <ThrowOnError extends boolean = false>(
     unknown,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vTvSeasonAggregateCreditsResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -2411,9 +2010,6 @@ export const tvSeasonChangesById = <ThrowOnError extends boolean = false>(
 ) => {
   return (options.client ?? _heyApiClient).get<TvSeasonChangesByIdResponses, unknown, ThrowOnError>(
     {
-      responseValidator: async (data) => {
-        return await v.parseAsync(vTvSeasonChangesByIdResponse, data);
-      },
       security: [
         {
           name: 'Authorization',
@@ -2433,9 +2029,6 @@ export const tvSeasonCredits = <ThrowOnError extends boolean = false>(
   options: Options<TvSeasonCreditsData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<TvSeasonCreditsResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vTvSeasonCreditsResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -2456,9 +2049,6 @@ export const tvSeasonExternalIds = <ThrowOnError extends boolean = false>(
 ) => {
   return (options.client ?? _heyApiClient).get<TvSeasonExternalIdsResponses, unknown, ThrowOnError>(
     {
-      responseValidator: async (data) => {
-        return await v.parseAsync(vTvSeasonExternalIdsResponse, data);
-      },
       security: [
         {
           name: 'Authorization',
@@ -2483,9 +2073,6 @@ export const tvSeasonTranslations = <ThrowOnError extends boolean = false>(
     unknown,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vTvSeasonTranslationsResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -2505,9 +2092,6 @@ export const tvSeasonVideos = <ThrowOnError extends boolean = false>(
   options: Options<TvSeasonVideosData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<TvSeasonVideosResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vTvSeasonVideosResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -2526,9 +2110,6 @@ export const tvEpisodeCredits = <ThrowOnError extends boolean = false>(
   options: Options<TvEpisodeCreditsData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<TvEpisodeCreditsResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vTvEpisodeCreditsResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -2552,9 +2133,6 @@ export const tvEpisodeExternalIds = <ThrowOnError extends boolean = false>(
     unknown,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vTvEpisodeExternalIdsResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -2578,9 +2156,6 @@ export const tvEpisodeTranslations = <ThrowOnError extends boolean = false>(
     unknown,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vTvEpisodeTranslationsResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -2600,9 +2175,6 @@ export const tvEpisodeVideos = <ThrowOnError extends boolean = false>(
   options: Options<TvEpisodeVideosData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<TvEpisodeVideosResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vTvEpisodeVideosResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -2626,9 +2198,6 @@ export const tvEpisodeDeleteRating = <ThrowOnError extends boolean = false>(
     unknown,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vTvEpisodeDeleteRatingResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -2649,9 +2218,6 @@ export const tvEpisodeAddRating = <ThrowOnError extends boolean = false>(
 ) => {
   return (options.client ?? _heyApiClient).post<TvEpisodeAddRatingResponses, unknown, ThrowOnError>(
     {
-      responseValidator: async (data) => {
-        return await v.parseAsync(vTvEpisodeAddRatingResponse, data);
-      },
       security: [
         {
           name: 'Authorization',
@@ -2672,9 +2238,6 @@ export const accountDetails = <ThrowOnError extends boolean = false>(
   options: Options<AccountDetailsData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<AccountDetailsResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vAccountDetailsResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -2694,9 +2257,6 @@ export const accountLists = <ThrowOnError extends boolean = false>(
   options: Options<AccountListsData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<AccountListsResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vAccountListsResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -2717,9 +2277,6 @@ export const accountGetFavorites = <ThrowOnError extends boolean = false>(
 ) => {
   return (options.client ?? _heyApiClient).get<AccountGetFavoritesResponses, unknown, ThrowOnError>(
     {
-      responseValidator: async (data) => {
-        return await v.parseAsync(vAccountGetFavoritesResponse, data);
-      },
       security: [
         {
           name: 'Authorization',
@@ -2740,9 +2297,6 @@ export const accountFavoriteTv = <ThrowOnError extends boolean = false>(
   options: Options<AccountFavoriteTvData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<AccountFavoriteTvResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vAccountFavoriteTvResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -2762,9 +2316,6 @@ export const accountRatedMovies = <ThrowOnError extends boolean = false>(
   options: Options<AccountRatedMoviesData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<AccountRatedMoviesResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vAccountRatedMoviesResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -2784,9 +2335,6 @@ export const accountRatedTv = <ThrowOnError extends boolean = false>(
   options: Options<AccountRatedTvData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<AccountRatedTvResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vAccountRatedTvResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -2810,9 +2358,6 @@ export const accountRatedTvEpisodes = <ThrowOnError extends boolean = false>(
     unknown,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vAccountRatedTvEpisodesResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -2836,9 +2381,6 @@ export const accountWatchlistMovies = <ThrowOnError extends boolean = false>(
     unknown,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vAccountWatchlistMoviesResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -2858,9 +2400,6 @@ export const accountWatchlistTv = <ThrowOnError extends boolean = false>(
   options: Options<AccountWatchlistTvData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<AccountWatchlistTvResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vAccountWatchlistTvResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -2881,9 +2420,6 @@ export const accountAddFavorite = <ThrowOnError extends boolean = false>(
 ) => {
   return (options.client ?? _heyApiClient).post<AccountAddFavoriteResponses, unknown, ThrowOnError>(
     {
-      responseValidator: async (data) => {
-        return await v.parseAsync(vAccountAddFavoriteResponse, data);
-      },
       security: [
         {
           name: 'Authorization',
@@ -2912,9 +2448,6 @@ export const accountAddToWatchlist = <ThrowOnError extends boolean = false>(
     unknown,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vAccountAddToWatchlistResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -2942,9 +2475,6 @@ export const certificationMovieList = <ThrowOnError extends boolean = false>(
     unknown,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vCertificationMovieListResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -2967,9 +2497,6 @@ export const certificationsTvList = <ThrowOnError extends boolean = false>(
     unknown,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vCertificationsTvListResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -2989,9 +2516,6 @@ export const changesMovieList = <ThrowOnError extends boolean = false>(
   options?: Options<ChangesMovieListData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).get<ChangesMovieListResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vChangesMovieListResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -3010,9 +2534,6 @@ export const changesTvList = <ThrowOnError extends boolean = false>(
   options?: Options<ChangesTvListData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).get<ChangesTvListResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vChangesTvListResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -3031,9 +2552,6 @@ export const changesPeopleList = <ThrowOnError extends boolean = false>(
   options?: Options<ChangesPeopleListData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).get<ChangesPeopleListResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vChangesPeopleListResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -3053,9 +2571,6 @@ export const collectionDetails = <ThrowOnError extends boolean = false>(
   options: Options<CollectionDetailsData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<CollectionDetailsResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vCollectionDetailsResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -3075,9 +2590,6 @@ export const collectionImages = <ThrowOnError extends boolean = false>(
   options: Options<CollectionImagesData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<CollectionImagesResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vCollectionImagesResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -3100,9 +2612,6 @@ export const collectionTranslations = <ThrowOnError extends boolean = false>(
     unknown,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vCollectionTranslationsResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -3122,9 +2631,6 @@ export const companyDetails = <ThrowOnError extends boolean = false>(
   options: Options<CompanyDetailsData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<CompanyDetailsResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vCompanyDetailsResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -3148,9 +2654,6 @@ export const companyAlternativeNames = <ThrowOnError extends boolean = false>(
     unknown,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vCompanyAlternativeNamesResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -3170,9 +2673,6 @@ export const companyImages = <ThrowOnError extends boolean = false>(
   options: Options<CompanyImagesData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<CompanyImagesResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vCompanyImagesResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -3192,9 +2692,6 @@ export const creditDetails = <ThrowOnError extends boolean = false>(
   options: Options<CreditDetailsData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<CreditDetailsResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vCreditDetailsResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -3214,9 +2711,6 @@ export const genreMovieList = <ThrowOnError extends boolean = false>(
   options?: Options<GenreMovieListData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).get<GenreMovieListResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vGenreMovieListResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -3236,9 +2730,6 @@ export const genreTvList = <ThrowOnError extends boolean = false>(
   options?: Options<GenreTvListData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).get<GenreTvListResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vGenreTvListResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -3262,9 +2753,6 @@ export const guestSessionRatedMovies = <ThrowOnError extends boolean = false>(
     unknown,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vGuestSessionRatedMoviesResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -3285,9 +2773,6 @@ export const guestSessionRatedTv = <ThrowOnError extends boolean = false>(
 ) => {
   return (options.client ?? _heyApiClient).get<GuestSessionRatedTvResponses, unknown, ThrowOnError>(
     {
-      responseValidator: async (data) => {
-        return await v.parseAsync(vGuestSessionRatedTvResponse, data);
-      },
       security: [
         {
           name: 'Authorization',
@@ -3312,9 +2797,6 @@ export const guestSessionRatedTvEpisodes = <ThrowOnError extends boolean = false
     unknown,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vGuestSessionRatedTvEpisodesResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -3338,9 +2820,6 @@ export const watchProvidersAvailableRegions = <ThrowOnError extends boolean = fa
     unknown,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vWatchProvidersAvailableRegionsResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -3364,9 +2843,6 @@ export const watchProvidersMovieList = <ThrowOnError extends boolean = false>(
     unknown,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vWatchProvidersMovieListResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -3390,9 +2866,6 @@ export const watchProviderTvList = <ThrowOnError extends boolean = false>(
     unknown,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vWatchProviderTvListResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -3411,9 +2884,6 @@ export const keywordDetails = <ThrowOnError extends boolean = false>(
   options: Options<KeywordDetailsData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<KeywordDetailsResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vKeywordDetailsResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -3432,9 +2902,6 @@ export const keywordMovies = <ThrowOnError extends boolean = false>(
   options: Options<KeywordMoviesData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<KeywordMoviesResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vKeywordMoviesResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -3454,9 +2921,6 @@ export const listDelete = <ThrowOnError extends boolean = false>(
   options: Options<ListDeleteData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).delete<ListDeleteResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vListDeleteResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -3475,9 +2939,6 @@ export const listDetails = <ThrowOnError extends boolean = false>(
   options: Options<ListDetailsData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<ListDetailsResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vListDetailsResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -3498,9 +2959,6 @@ export const listCheckItemStatus = <ThrowOnError extends boolean = false>(
 ) => {
   return (options.client ?? _heyApiClient).get<ListCheckItemStatusResponses, unknown, ThrowOnError>(
     {
-      responseValidator: async (data) => {
-        return await v.parseAsync(vListCheckItemStatusResponse, data);
-      },
       security: [
         {
           name: 'Authorization',
@@ -3520,9 +2978,6 @@ export const listCreate = <ThrowOnError extends boolean = false>(
   options: Options<ListCreateData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).post<ListCreateResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vListCreateResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -3546,9 +3001,6 @@ export const listAddMovie = <ThrowOnError extends boolean = false>(
   options: Options<ListAddMovieData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).post<ListAddMovieResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vListAddMovieResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -3572,9 +3024,6 @@ export const listRemoveMovie = <ThrowOnError extends boolean = false>(
   options: Options<ListRemoveMovieData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).post<ListRemoveMovieResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vListRemoveMovieResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -3598,9 +3047,6 @@ export const listClear = <ThrowOnError extends boolean = false>(
   options: Options<ListClearData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).post<ListClearResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vListClearResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -3619,9 +3065,6 @@ export const networkDetails = <ThrowOnError extends boolean = false>(
   options: Options<NetworkDetailsData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<NetworkDetailsResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vNetworkDetailsResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -3641,9 +3084,6 @@ export const detailsCopy = <ThrowOnError extends boolean = false>(
   options: Options<DetailsCopyData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<DetailsCopyResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vDetailsCopyResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -3667,9 +3107,6 @@ export const alternativeNamesCopy = <ThrowOnError extends boolean = false>(
     unknown,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vAlternativeNamesCopyResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -3689,9 +3126,6 @@ export const reviewDetails = <ThrowOnError extends boolean = false>(
   options: Options<ReviewDetailsData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<ReviewDetailsResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vReviewDetailsResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -3715,9 +3149,6 @@ export const authenticationValidateKey = <ThrowOnError extends boolean = false>(
     AuthenticationValidateKeyErrors,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vAuthenticationValidateKeyResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -3741,9 +3172,6 @@ export const tvSeasonWatchProviders = <ThrowOnError extends boolean = false>(
     unknown,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vTvSeasonWatchProvidersResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -3767,9 +3195,6 @@ export const configurationCountries = <ThrowOnError extends boolean = false>(
     unknown,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vConfigurationCountriesResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -3789,9 +3214,6 @@ export const configurationJobs = <ThrowOnError extends boolean = false>(
   options?: Options<ConfigurationJobsData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).get<ConfigurationJobsResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vConfigurationJobsResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -3815,9 +3237,6 @@ export const configurationLanguages = <ThrowOnError extends boolean = false>(
     unknown,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vConfigurationLanguagesResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -3841,9 +3260,6 @@ export const configurationPrimaryTranslations = <ThrowOnError extends boolean = 
     unknown,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vConfigurationPrimaryTranslationsResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -3867,9 +3283,6 @@ export const configurationTimezones = <ThrowOnError extends boolean = false>(
     unknown,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vConfigurationTimezonesResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -3893,9 +3306,6 @@ export const authenticationCreateSessionFromLogin = <ThrowOnError extends boolea
     unknown,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vAuthenticationCreateSessionFromLoginResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -3919,9 +3329,6 @@ export const personLatestId = <ThrowOnError extends boolean = false>(
   options?: Options<PersonLatestIdData, ThrowOnError>,
 ) => {
   return (options?.client ?? _heyApiClient).get<PersonLatestIdResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vPersonLatestIdResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -3945,9 +3352,6 @@ export const tvEpisodeChangesById = <ThrowOnError extends boolean = false>(
     unknown,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vTvEpisodeChangesByIdResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -3971,9 +3375,6 @@ export const tvEpisodeGroupDetails = <ThrowOnError extends boolean = false>(
     unknown,
     ThrowOnError
   >({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vTvEpisodeGroupDetailsResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -3993,9 +3394,6 @@ export const searchCompany = <ThrowOnError extends boolean = false>(
   options: Options<SearchCompanyData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<SearchCompanyResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vSearchCompanyResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -4015,9 +3413,6 @@ export const searchCollection = <ThrowOnError extends boolean = false>(
   options: Options<SearchCollectionData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<SearchCollectionResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vSearchCollectionResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -4037,9 +3432,6 @@ export const searchKeyword = <ThrowOnError extends boolean = false>(
   options: Options<SearchKeywordData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<SearchKeywordResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vSearchKeywordResponse, data);
-    },
     security: [
       {
         name: 'Authorization',
@@ -4059,9 +3451,6 @@ export const listsCopy = <ThrowOnError extends boolean = false>(
   options: Options<ListsCopyData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).get<ListsCopyResponses, unknown, ThrowOnError>({
-    responseValidator: async (data) => {
-      return await v.parseAsync(vListsCopyResponse, data);
-    },
     security: [
       {
         name: 'Authorization',

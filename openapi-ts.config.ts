@@ -6,7 +6,7 @@ export default defineConfig({
   },
   output: {
     format: 'prettier',
-    lint: 'oxlint',
+    lint: 'eslint',
     path: 'src/lib/api-client/generated',
   },
   parser: {
@@ -26,7 +26,9 @@ export default defineConfig({
     },
     {
       name: '@hey-api/sdk',
-      validator: 'valibot',
+      // Some properties are wrongly typed in the schema
+      // e.g. "backdrop_path" is an optional string, but comes also as "null"
+      // validator: 'valibot',
       client: '@hey-api/client-next',
     },
     'valibot',
