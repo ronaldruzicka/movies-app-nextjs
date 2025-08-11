@@ -1,0 +1,9 @@
+**/generated
+**/node_modules
+**/build
+**/dist
+**/coverage
+**/cache
+**/schema.json
+pnpm-lock.yaml
+pnpm-workspace.yaml

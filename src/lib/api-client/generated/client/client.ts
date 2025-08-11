@@ -81,7 +81,10 @@ export const createClient = (config: Config = {}): Client => {
     };
 
     if (response.ok) {
-      if (response.status === 204 || response.headers.get('Content-Length') === '0') {
+      if (
+        response.status === 204 ||
+        response.headers.get('Content-Length') === '0'
+      ) {
         return {
           data: {},
           ...result,

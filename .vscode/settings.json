@@ -11,5 +11,8 @@
     "source.organizeImports": "always"
   },
   "editor.formatOnSave": true,
-  "biome.enabled": false
+  "biome.enabled": false,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "editor.formatOnPaste": true
 }

@@ -2,7 +2,7 @@
 
 import { useActionState } from 'react';
 
-import { search, SearchState } from './actions/search.action';
+import { type SearchState, search } from './actions/search.action';
 import { SearchBar } from './search-bar';
 import { SearchResults } from './search-results';
 
@@ -11,7 +11,7 @@ export function Search() {
 
   return (
     <>
-      <SearchBar isPending={isPending} formAction={formAction} />
+      <SearchBar formAction={formAction} isPending={isPending} />
       <SearchResults isPending={isPending} results={state} />
     </>
   );

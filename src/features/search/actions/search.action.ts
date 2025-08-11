@@ -1,12 +1,12 @@
 'use server';
 
 import {
-  SearchKeywordResponse,
+  type SearchKeywordResponse,
   searchMovie,
   searchMulti,
   searchTv,
 } from '@/lib/api-client/generated';
-import { ContentType } from '../search-bar';
+import type { ContentType } from '../search-bar';
 
 export type SearchState = SearchKeywordResponse | { error: string } | undefined;
 

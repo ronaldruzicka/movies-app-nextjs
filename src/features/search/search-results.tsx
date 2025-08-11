@@ -26,9 +26,9 @@ export function SearchResults({ isPending, results }: Props) {
 
   return (
     <ul>
-      {results.results.map((result) => (
-        <li key={result.id}>{result.name}</li>
-      ))}
+      {results.results.map((result) => {
+        return <li key={result.id}>{result.name}</li>;
+      })}
     </ul>
   );
 }

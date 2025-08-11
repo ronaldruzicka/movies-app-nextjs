@@ -8,7 +8,7 @@ export function Header() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center gap-2">
-            <div className="bg-primary/10 border-primary/20 rounded-lg border p-2">
+            <div className="border-primary/20 bg-primary/10 rounded-lg border p-2">
               {/* <Film className="h-6 w-6 text-primary" /> */}
             </div>
             <span className="text-foreground text-xl font-bold">CineMax</span>
@@ -16,16 +16,16 @@ export function Header() {
 
           {/* Navigation - Hidden on mobile */}
           <nav className="hidden items-center gap-6 md:flex">
-            <Button variant="ghost" className="text-foreground hover:text-primary">
+            <Button className="text-foreground hover:text-primary" variant="ghost">
               Home
             </Button>
-            <Button variant="ghost" className="text-foreground hover:text-primary">
+            <Button className="text-foreground hover:text-primary" variant="ghost">
               Movies
             </Button>
-            <Button variant="ghost" className="text-foreground hover:text-primary">
+            <Button className="text-foreground hover:text-primary" variant="ghost">
               TV Shows
             </Button>
-            <Button variant="ghost" className="text-foreground hover:text-primary">
+            <Button className="text-foreground hover:text-primary" variant="ghost">
               My List
             </Button>
           </nav>
@@ -47,7 +47,7 @@ export function Header() {
             <SignInButton />
 
             {/* Mobile menu */}
-            <Button variant="ghost" size="sm" className="md:hidden">
+            <Button className="md:hidden" size="sm" variant="ghost">
               {/* <Menu className="h-5 w-5" /> */}
             </Button>
           </div>

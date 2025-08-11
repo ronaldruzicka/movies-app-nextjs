@@ -1,7 +1,6 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-
 import { Input } from '@/components/ui/input';
 import {
   Select,
@@ -52,9 +51,11 @@ export function SearchBar({ formAction, isPending }: Props) {
     <form action={formAction}>
       <search className="mx-auto my-52 flex h-16 w-2/3 items-center gap-2 rounded-4xl bg-white px-4">
         <Select
-          name="contentType"
           defaultValue={contentType}
-          onValueChange={(value) => setContentType(value as ContentType)}
+          name="contentType"
+          onValueChange={(value) => {
+            return setContentType(value as ContentType);
+          }}
         >
           <SelectTrigger>
             <SelectValue asChild>{getSelectedValue(contentType)}</SelectValue>
@@ -72,15 +73,15 @@ export function SearchBar({ formAction, isPending }: Props) {
           </SelectContent>
         </Select>
 
-        <Separator orientation="vertical" className="h-9 bg-neutral-200" />
+        <Separator className="h-9 bg-neutral-200" orientation="vertical" />
 
-        <Input type="text" placeholder="Search" name="search" className="shadow-none" />
+        <Input className="shadow-none" name="search" placeholder="Search" type="text" />
 
-        <Separator orientation="vertical" className="h-9 bg-neutral-200" />
+        <Separator className="h-9 bg-neutral-200" orientation="vertical" />
 
         <Tooltip>
           <TooltipTrigger asChild>
-            <Button type="submit" disabled={isPending} variant="ghost" className="rounded-full">
+            <Button className="rounded-full" disabled={isPending} type="submit" variant="ghost">
               {isPending ? <Loader2 className="animate-spin" /> : <SearchIcon />}
             </Button>
           </TooltipTrigger>

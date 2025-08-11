@@ -1,3 +1,23 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript"]
+  "extends": ["next/core-web-vitals", "next/typescript", "prettier"],
+  "ignorePatterns": [
+    "**/generated",
+    "**/node_modules",
+    "**/build",
+    "**/dist",
+    "**/coverage",
+    "**/cache",
+    "**/schema.json",
+    "pnpm-lock.yaml",
+    "pnpm-workspace.yaml"
+  ],
+  "rules": {
+    "react/jsx-sort-props": [
+      "error",
+      {
+        "reservedFirst": true, // make key, ref first in component
+        "ignoreCase": true // ignore case in sorting
+      }
+    ]
+  }
 }
