@@ -18,6 +18,7 @@
         "reservedFirst": true, // make key, ref first in component
         "ignoreCase": true // ignore case in sorting
       }
-    ]
+    ],
+    "@typescript-eslint/consistent-type-imports": "error"
   }
 }

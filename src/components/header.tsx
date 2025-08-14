@@ -1,4 +1,5 @@
 import { SignInButton } from './sign-in-button';
+import { ThemeToggle } from './theme/theme-toggle';
 import { Button } from './ui/button';
 
 export function Header() {
@@ -42,14 +43,14 @@ export function Header() {
                 className="pl-10 w-64 bg-input border-border focus:border-primary focus:ring-primary/20"
               /> */}
             </div>
-
             {/* User actions */}
             <SignInButton />
-
             {/* Mobile menu */}
             <Button className="md:hidden" size="sm" variant="ghost">
               {/* <Menu className="h-5 w-5" /> */}
             </Button>
+
+            <ThemeToggle />
           </div>
         </div>
 
