@@ -3,7 +3,25 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@keyframes scroll-fade {
+  0% {
+    --left-fade: 0;
+  }
+  10%,
+  100% {
+    --left-fade: 1.5rem;
+  }
+  0%,
+  90% {
+    --right-fade: 1.5rem;
+  }
+  100% {
+    --right-fade: 0;
+  }
+}
+
 @theme inline {
+  --breakpoint-xs: 36rem;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
@@ -41,6 +59,20 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+
+  --animate-scroll-fade: scroll-fade 0.3s ease-out;
+}
+
+@property --left-fade {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0;
+}
+
+@property --right-fade {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0;
 }
 
 :root {
@@ -117,5 +149,24 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide {
+    scrollbar-width: none;
+  }
+
+  .scrollable {
+    overflow-x: scroll;
+    mask: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0),
+      #fff var(--left-fade) calc(100% - var(--right-fade)),
+      rgba(0, 0, 0, 0)
+    );
+    animation: var(--animate-scroll-fade);
+    animation-timeline: --scroll-fade;
+    scroll-timeline: --scroll-fade x;
   }
 }

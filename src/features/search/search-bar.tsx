@@ -2,94 +2,34 @@
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
-import { Film, FolderSearch, Loader2, SearchIcon, Tv } from 'lucide-react';
-import { useState } from 'react';
+import { Loader2, SearchIcon } from 'lucide-react';
 
 import { Separator } from '@/components/ui/separator';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import Form from 'next/form';
+import { useActionState } from 'react';
+import type { SearchState } from './actions/search.action';
+import { search } from './actions/search.action';
 
-function getSelectedValue(value: ContentType) {
-  switch (value) {
-    case 'movies':
-      return <Film />;
-    case 'tv-shows':
-      return <Tv />;
-    case 'all':
-      return <FolderSearch />;
-  }
-}
-
-function getSelectedValueTooltip(value: ContentType) {
-  switch (value) {
-    case 'movies':
-      return 'movies';
-    case 'tv-shows':
-      return 'TV shows';
-    case 'all':
-      return 'movies and TV shows';
-  }
-}
-
-export type ContentType = 'movies' | 'tv-shows' | 'all';
-
-type Props = {
-  formAction: (payload: FormData) => void;
-  isPending: boolean;
-};
-
-export function SearchBar({ formAction, isPending }: Props) {
-  const [contentType, setContentType] = useState<ContentType>('all');
+export function SearchBar() {
+  const [, formAction, isPending] = useActionState<SearchState, FormData>(search, undefined);
 
   return (
-    <form action={formAction}>
-      <search className="mx-auto my-52 flex h-16 w-2/3 items-center gap-2 rounded-4xl bg-white px-4">
-        <Select
-          defaultValue={contentType}
-          name="contentType"
-          onValueChange={(value) => {
-            return setContentType(value as ContentType);
-          }}
-        >
-          <SelectTrigger>
-            <SelectValue asChild>{getSelectedValue(contentType)}</SelectValue>
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="movies">
-              <Film /> Movies
-            </SelectItem>
-            <SelectItem value="tv-shows">
-              <Tv /> TV Shows
-            </SelectItem>
-            <SelectItem value="all">
-              <FolderSearch /> All
-            </SelectItem>
-          </SelectContent>
-        </Select>
+    <Form action={formAction}>
+      <search className="relative my-52 flex w-[70dvw] items-center">
+        <Input
+          className="h-16 rounded-4xl bg-transparent px-4 shadow-none"
+          name="query"
+          placeholder="Search for a movie, tv show, person ... "
+          type="text"
+        />
 
-        <Separator className="h-9 bg-neutral-200" orientation="vertical" />
-
-        <Input className="shadow-none" name="search" placeholder="Search" type="text" />
-
-        <Separator className="h-9 bg-neutral-200" orientation="vertical" />
-
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button className="rounded-full" disabled={isPending} type="submit" variant="ghost">
-              {isPending ? <Loader2 className="animate-spin" /> : <SearchIcon />}
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>Search for {getSelectedValueTooltip(contentType)}</p>
-          </TooltipContent>
-        </Tooltip>
+        <div className="absolute right-4 flex items-center gap-2">
+          <Separator className="h-9 bg-neutral-200" orientation="vertical" />
+          <Button className="rounded-full" disabled={isPending} type="submit" variant="ghost">
+            {isPending ? <Loader2 className="animate-spin" /> : <SearchIcon />}
+          </Button>
+        </div>
       </search>
-    </form>
+    </Form>
   );
 }

@@ -1,18 +1,16 @@
-'use client';
-
-import { useActionState } from 'react';
-
-import { type SearchState, search } from './actions/search.action';
 import { SearchBar } from './search-bar';
-import { SearchResults } from './search-results';
 
-export function Search() {
-  const [state, formAction, isPending] = useActionState<SearchState, FormData>(search, undefined);
+type Props = {
+  searchQuery?: string;
+};
 
+export function Search({ searchQuery }: Props) {
   return (
-    <>
-      <SearchBar formAction={formAction} isPending={isPending} />
-      <SearchResults isPending={isPending} results={state} />
-    </>
+    <div className="flex flex-col items-center">
+      <SearchBar />
+      {/* <Suspense fallback={<div>Loading results...</div>}>
+        <SearchTypeahead searchQuery={searchQuery} />
+      </Suspense> */}
+    </div>
   );
 }

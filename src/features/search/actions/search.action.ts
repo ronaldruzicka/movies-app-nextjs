@@ -1,41 +1,20 @@
 'use server';
 
-import {
-  type SearchKeywordResponse,
-  searchMovie,
-  searchMulti,
-  searchTv,
-} from '@/lib/api-client/generated';
-import type { ContentType } from '../search-bar';
+import { type SearchKeywordResponse } from '@/lib/api-client/generated';
+import { redirect } from 'next/navigation';
 
 export type SearchState = SearchKeywordResponse | { error: string } | undefined;
 
-function getSearchPromise(searchData: string, contentType: string) {
-  if (contentType === 'all') {
-    return searchMulti({ query: { query: searchData } });
+export async function search(_: unknown, formData: FormData): Promise<SearchState> {
+  const searchQuery = formData.get('query');
+
+  if (!searchQuery || typeof searchQuery !== 'string') {
+    return { error: 'You need to write a search query' };
   }
 
-  if (contentType === 'movies') {
-    return searchMovie({ query: { query: searchData } });
-  }
+  const searchParams = new URLSearchParams();
 
-  return searchTv({ query: { query: searchData } });
-}
+  searchParams.set('query', searchQuery);
 
-export async function search(_: SearchState, formData: FormData): Promise<SearchState> {
-  const searchData = formData.get('search');
-  const contentType = formData.get('contentType') as ContentType;
-
-  if (!searchData || typeof searchData !== 'string') {
-    return {};
-  }
-
-  const searchPromise = getSearchPromise(searchData, contentType);
-  const response = await searchPromise;
-
-  if (response.error) {
-    return { error: 'Something went wrong!' };
-  }
-
-  return response.data;
+  redirect(`/search?${searchParams.toString()}`);
 }
