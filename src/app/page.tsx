@@ -1,12 +1,11 @@
 import { Search } from '@/features/search/search';
 import { client } from '@/lib/api-client/generated/client.gen';
 
-async function myInterceptor(request: Request) {
-  console.log('💬 ~ myInterceptor ~ request:', request);
+type ReqInterceptor = Parameters<typeof client.interceptors.request.use>[0];
 
-  // do something
-  return request;
-}
+const myInterceptor: ReqInterceptor = async (options) => {
+  console.log('💬 ~ myInterceptor ~ options:', options);
+};
 
 client.interceptors.request.use(myInterceptor);
 

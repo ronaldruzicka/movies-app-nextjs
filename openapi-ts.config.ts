@@ -31,6 +31,8 @@ export default defineConfig({
       // validator: 'valibot',
       client: '@hey-api/client-next',
     },
-    'valibot',
+    // Some properties are wrongly typed in the schema
+    // e.g. "backdrop_path" is an optional string, but comes also as "null"
+    // 'valibot',
   ],
 });
