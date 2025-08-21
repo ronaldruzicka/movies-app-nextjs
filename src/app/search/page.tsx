@@ -5,19 +5,11 @@ import { SearchResultsGrid } from '@/features/search/search-results-grid';
 import { searchMovie, searchPerson, searchTv } from '@/lib/api-client/generated';
 import { Suspense } from 'react';
 
-type SearchQueryParams = {
-  query?: string;
-};
-
-type Props = {
-  searchParams?: Promise<SearchQueryParams>;
-};
-
-export default async function SearchPage({ searchParams }: Props) {
+export default async function SearchPage({ searchParams }: PageProps<'/search'>) {
   const params = await searchParams;
   const { query } = params ?? {};
 
-  if (!query) {
+  if (!query || typeof query !== 'string') {
     return (
       <div className="container py-8">
         <p>Enter a search query to see results.</p>

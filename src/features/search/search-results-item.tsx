@@ -17,7 +17,8 @@ export function SearchResultsItem({ alt, category, id, imagePath, info, subtitle
   return (
     <Link
       className="bg-muted group flex gap-3 overflow-hidden rounded-2xl transition-shadow hover:shadow-lg"
-      href={`/${category}/${id}`}
+      // TODO: for now, until I create other detail pages (tv show and person)
+      href={`/${category as 'movie'}/${id}`}
     >
       <div className="flex h-[138px] w-[92] shrink-0 items-center justify-center overflow-hidden bg-neutral-300 dark:bg-neutral-600">
         {imagePath ? (

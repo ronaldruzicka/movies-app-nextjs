@@ -1,10 +1,7 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  // Doesn't work with Turbopack yet 😒
-  // experimental: {
-  //   typedRoutes: true,
-  // },
+  typedRoutes: true,
   images: {
     remotePatterns: [
       {

@@ -9,21 +9,10 @@ const myInterceptor: ReqInterceptor = async (options) => {
 
 client.interceptors.request.use(myInterceptor);
 
-type SearchQueryParams = {
-  query?: string;
-};
-
-type Props = {
-  searchParams?: Promise<SearchQueryParams>;
-};
-
-export default async function Home(props: Props) {
-  const searchParams = await props.searchParams;
-  const searchQuery = searchParams?.query;
-
+export default async function Home() {
   return (
     <main className="flex min-h-screen flex-col gap-4 bg-cover bg-fixed bg-center bg-no-repeat">
-      <Search searchQuery={searchQuery} />
+      <Search />
     </main>
   );
 }
