@@ -18,7 +18,7 @@ export function Header({ avatar, username }: Props) {
             <div className="border-primary/20 bg-primary/10 rounded-lg border p-2">
               {/* <Film className="h-6 w-6 text-primary" /> */}
             </div>
-            <span className="text-foreground text-xl font-bold">CineMax</span>
+            <span className="text-foreground text-xl font-bold">Movio</span>
           </div>
 
           {/* Navigation - Hidden on mobile */}
