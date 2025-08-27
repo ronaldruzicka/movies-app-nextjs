@@ -10835,9 +10835,9 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": ["RAW_BODY"],
+                "required": ["request_token"],
                 "properties": {
-                  "RAW_BODY": { "type": "string", "format": "json" }
+                  "request_token": { "type": "string", "example": "7f7d52c1b13da6840285be94df9699b9dea4r1421" }
                 }
               },
               "examples": {
@@ -10947,9 +10947,9 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": ["RAW_BODY"],
+                "required": ["session_id"],
                 "properties": {
-                  "RAW_BODY": { "type": "string", "format": "json" }
+                  "session_id": { "type": "string" }
                 }
               },
               "examples": {

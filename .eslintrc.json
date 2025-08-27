@@ -15,8 +15,8 @@
     "react/jsx-sort-props": [
       "error",
       {
-        "reservedFirst": true, // make key, ref first in component
-        "ignoreCase": true // ignore case in sorting
+        "reservedFirst": true,
+        "ignoreCase": true
       }
     ],
     "@typescript-eslint/consistent-type-imports": "error"

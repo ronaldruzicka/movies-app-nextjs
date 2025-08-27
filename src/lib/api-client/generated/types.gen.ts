@@ -3181,7 +3181,7 @@ export type AuthenticationCreateRequestTokenResponse = AuthenticationCreateReque
 
 export type AuthenticationCreateSessionData = {
     body?: {
-        RAW_BODY: string;
+        request_token: string;
     };
     path?: never;
     query?: never;
@@ -3223,7 +3223,7 @@ export type AuthenticationCreateSessionFromV4TokenResponse = AuthenticationCreat
 
 export type AuthenticationDeleteSessionData = {
     body?: {
-        RAW_BODY: string;
+        session_id: string;
     };
     path?: never;
     query?: never;
