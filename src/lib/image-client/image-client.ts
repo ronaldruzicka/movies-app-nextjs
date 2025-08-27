@@ -17,3 +17,12 @@ export const getPoster = (options: { path: string; size: PosterSizes }) => {
 
   return `${image_base}/${poster_size}${path}`;
 };
+
+type ProfileSizes = 45 | 185 | 'original';
+
+export const getProfileImage = (options: { path: string; size: ProfileSizes }) => {
+  const { path, size } = options;
+  const profile_size = typeof size === 'number' ? `w${size}` : size;
+
+  return `${image_base}/${profile_size}${path}`;
+};

@@ -1,8 +1,14 @@
+import { AccountDropdown } from './account-dropdown';
 import { SignInButton } from './sign-in-button';
 import { ThemeToggle } from './theme/theme-toggle';
 import { Button } from './ui/button';
 
-export function Header() {
+type Props = {
+  avatar: string | undefined;
+  username: string | undefined;
+};
+
+export function Header({ avatar, username }: Props) {
   return (
     <header className="border-border/50 bg-background/60 sticky top-0 z-50 w-full border-b backdrop-blur">
       <div className="container mx-auto px-4 py-4">
@@ -33,18 +39,8 @@ export function Header() {
 
           {/* Search and User */}
           <div className="flex items-center gap-4">
-            {/* Search - Hidden on small screens */}
-            <div className="relative hidden sm:block">
-              {/* <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-              <Input
-                placeholder="Search movies..."
-                value={searchQuery}
-                onChange={(e) => onSearchChange(e.target.value)}
-                className="pl-10 w-64 bg-input border-border focus:border-primary focus:ring-primary/20"
-              /> */}
-            </div>
             {/* User actions */}
-            <SignInButton />
+            {username ? <AccountDropdown avatar={avatar} username={username} /> : <SignInButton />}
             {/* Mobile menu */}
             <Button className="md:hidden" size="sm" variant="ghost">
               {/* <Menu className="h-5 w-5" /> */}
