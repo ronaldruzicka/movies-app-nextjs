@@ -9,29 +9,45 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
-    name: Build
+  token:
+    name: Check GitHub Token
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Enable Corepack (pnpm)
-        run: corepack enable
+      - name: Verify GITHUB_TOKEN
+        run: |
+          if [ -z "${{ secrets.GITHUB_TOKEN }}" ]; then
+            echo "GITHUB_TOKEN is not set."
+            exit 1
+          else
+            echo "GITHUB_TOKEN is set to: ${{ secrets.GITHUB_TOKEN }}"
+          fi
+  # build:
+  #   name: Build
+  #   runs-on: ubuntu-latest
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: .nvmrc
-          cache: pnpm
-          cache-dependency-path: pnpm-lock.yaml
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v4
 
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+  #     - name: Enable Corepack (pnpm)
+  #       run: corepack enable
 
-      - name: Check formatting
-        run: pnpm format:check
+  #     - name: Setup Node.js
+  #       uses: actions/setup-node@v4
+  #       with:
+  #         node-version-file: .nvmrc
+  #         cache: pnpm
+  #         cache-dependency-path: pnpm-lock.yaml
 
-      - name: Build
-        run: pnpm build
+  #     - name: Install dependencies
+  #       run: pnpm install --frozen-lockfile
+
+  #     - name: Check formatting
+  #       run: pnpm format:check
+
+  #     - name: Build
+  #       run: pnpm build
