@@ -4,9 +4,6 @@ description: 'Checkout, enable Corepack, setup Node, install dependencies'
 runs:
   using: 'composite'
   steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-
     - name: Enable Corepack (pnpm/yarn)
       shell: bash
       run: corepack enable
