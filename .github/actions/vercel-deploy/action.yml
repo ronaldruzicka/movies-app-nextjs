@@ -1,0 +1,32 @@
+name: 'Vercel Deploy'
+description: 'Deploy a Next.js app to Vercel using the Vercel CLI with environment input via pnpm dlx'
+
+inputs:
+  environment:
+    description: 'Target environment to deploy to (production or preview)'
+    required: true
+
+# Gets VERCEL_TOKEN from caller workflow secrets
+runs:
+  using: 'composite'
+  steps:
+    - name: Prepare Node project
+      uses: ./.github/actions/prepare
+
+    - name: Pull Vercel environment information
+      shell: bash
+      run: pnpm dlx vercel@latest pull --yes --environment "${{ inputs.environment }}" --token "$VERCEL_TOKEN"
+
+    - name: Build
+      shell: bash
+      run: pnpm dlx vercel@latest build --token "$VERCEL_TOKEN"
+
+    - name: Deploy to Vercel (preview)
+      if: ${{ inputs.environment != 'production' }}
+      shell: bash
+      run: pnpm dlx vercel@latest deploy --prebuilt --token "$VERCEL_TOKEN"
+
+    - name: Deploy to Vercel (production)
+      if: ${{ inputs.environment == 'production' }}
+      shell: bash
+      run: pnpm dlx vercel@latest deploy --prebuilt --prod --token "$VERCEL_TOKEN"
