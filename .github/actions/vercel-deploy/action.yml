@@ -38,8 +38,8 @@ runs:
         echo "$output"
 
         # Extract URLs from output
-        deployment_url=$(echo "$output" | grep -o 'https://[^[:space:]]*\.vercel\.app[^[:space:]]*' | head -1)
-        inspect_url=$(echo "$output" | grep -o 'https://vercel\.com/[^[:space:]]*' | head -1)
+        deployment_url=$(echo "$output" | awk '/Preview:/ {print $2}')
+        inspect_url=$(echo "$output" | awk '/Inspect:/ {print $2}')
 
         # Set outputs
         echo "deployment-url=$deployment_url" >> $GITHUB_OUTPUT
@@ -54,8 +54,8 @@ runs:
         echo "$output"
 
         # Extract URLs from output
-        deployment_url=$(echo "$output" | grep -o 'https://[^[:space:]]*\.vercel\.app[^[:space:]]*' | head -1)
-        inspect_url=$(echo "$output" | grep -o 'https://vercel\.com/[^[:space:]]*' | head -1)
+        deployment_url=$(echo "$output" | awk '/Preview:/ {print $2}')
+        inspect_url=$(echo "$output" | awk '/Inspect:/ {print $2}')
 
         # Set outputs
         echo "deployment-url=$deployment_url" >> $GITHUB_OUTPUT
