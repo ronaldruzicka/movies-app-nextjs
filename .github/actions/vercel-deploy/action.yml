@@ -1,6 +1,14 @@
 name: 'Vercel Deploy'
 description: 'Deploy a Next.js app to Vercel using the Vercel CLI with environment input via pnpm dlx'
 
+outputs:
+  deployment-url:
+    description: 'The deployment URL'
+    value: ${{ steps.deploy-preview.outputs.deployment-url || steps.deploy-production.outputs.deployment-url }}
+  inspect-url:
+    description: 'The Vercel inspect URL'
+    value: ${{ steps.deploy-preview.outputs.inspect-url || steps.deploy-production.outputs.inspect-url }}
+
 inputs:
   environment:
     description: 'Target environment to deploy to (production or preview)'
@@ -22,11 +30,55 @@ runs:
       run: pnpm dlx vercel@latest build --token "$VERCEL_TOKEN"
 
     - name: Deploy to Vercel (preview)
+      id: deploy-preview
       if: ${{ inputs.environment != 'production' }}
       shell: bash
-      run: pnpm dlx vercel@latest deploy --prebuilt --token "$VERCEL_TOKEN"
+      run: |
+        output=$(pnpm dlx vercel@latest deploy --prebuilt --token "$VERCEL_TOKEN")
+        echo "$output"
+
+        # Extract URLs from output
+        deployment_url=$(echo "$output" | grep -o 'https://[^[:space:]]*\.vercel\.app[^[:space:]]*' | head -1)
+        inspect_url=$(echo "$output" | grep -o 'https://vercel\.com/[^[:space:]]*' | head -1)
+
+        # Set outputs
+        echo "deployment-url=$deployment_url" >> $GITHUB_OUTPUT
+        echo "inspect-url=$inspect_url" >> $GITHUB_OUTPUT
 
     - name: Deploy to Vercel (production)
+      id: deploy-production
       if: ${{ inputs.environment == 'production' }}
       shell: bash
-      run: pnpm dlx vercel@latest deploy --prebuilt --prod --token "$VERCEL_TOKEN"
+      run: |
+        output=$(pnpm dlx vercel@latest deploy --prebuilt --prod --token "$VERCEL_TOKEN")
+        echo "$output"
+
+        # Extract URLs from output
+        deployment_url=$(echo "$output" | grep -o 'https://[^[:space:]]*\.vercel\.app[^[:space:]]*' | head -1)
+        inspect_url=$(echo "$output" | grep -o 'https://vercel\.com/[^[:space:]]*' | head -1)
+
+        # Set outputs
+        echo "deployment-url=$deployment_url" >> $GITHUB_OUTPUT
+        echo "inspect-url=$inspect_url" >> $GITHUB_OUTPUT
+
+    - name: Comment on PR
+      if: ${{ github.event_name == 'pull_request' && inputs.environment == 'preview' }}
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const deploymentUrl = '${{ steps.deploy-preview.outputs.deployment-url }}';
+          const inspectUrl = '${{ steps.deploy-preview.outputs.inspect-url }}';
+
+          const comment = `## 🚀 Deployment Complete
+
+          **Preview URL:** ${deploymentUrl}
+          **Inspect:** ${inspectUrl}
+
+          Deployed from commit: ${context.sha.substring(0, 7)}`;
+
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: comment
+          });
