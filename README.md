@@ -76,6 +76,7 @@ TMDB_REDIRECT_BASE_URL=http://localhost:3000/auth/callback
 ```
 
 Notes:
+
 - `TMDB_API_READ_ACCESS_TOKEN` is used as a Bearer token in `createClientConfig`.
 - `TMDB_API_KEY` is appended for endpoints that still expect the `api_key` query param (e.g. account details call).
 - `TMDB_REDIRECT_BASE_URL` must match what you configured in TMDB → Settings → API.
@@ -95,6 +96,7 @@ Notes:
 8. Protected routes (e.g. `/account/favorites`) are gated by `middleware.ts`.
 
 Logout:
+
 - `logoutAction` hits TMDB `authenticationDeleteSession`, deletes cookie, revalidates layout.
 
 ---

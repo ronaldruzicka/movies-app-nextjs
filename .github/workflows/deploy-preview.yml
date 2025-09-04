@@ -1,0 +1,25 @@
+name: Deploy to Vercel Preview
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    env:
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Vercel deploy preview
+        uses: ./.github/actions/vercel-deploy
+        with:
+          environment: preview
