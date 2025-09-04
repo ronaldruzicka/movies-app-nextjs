@@ -107,7 +107,7 @@ runs:
           const comment = `## 🚀 Deployment Complete
 
           **Preview URL:** ${deploymentUrl}
-          **Inspect:** ${inspectUrl}
+          **Deployment details:** ${inspectUrl}
 
           Deployed from commit: ${context.sha.substring(0, 7)}`;
 
