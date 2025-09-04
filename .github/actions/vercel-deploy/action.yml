@@ -34,67 +34,32 @@ runs:
       if: ${{ inputs.environment != 'production' }}
       shell: bash
       run: |
-        set +e  # Don't exit on error
-        output=$(pnpm dlx vercel@latest deploy --prebuilt --token "$VERCEL_TOKEN" 2>&1)
-        exit_code=$?
-        set -e  # Re-enable exit on error
-
-        echo "Exit code: $exit_code"
-        echo "Full output:"
+        output=$(pnpm dlx vercel@latest deploy --prebuilt --token "$VERCEL_TOKEN")
         echo "$output"
 
         # Extract URLs from output
-        deployment_url=$(echo "$output" | awk '/Preview:/ {print $2}')
-        inspect_url=$(echo "$output" | awk '/Inspect:/ {print $2}')
-
-        echo "Extracted deployment URL: $deployment_url"
-        echo "Extracted inspect URL: $inspect_url"
+        deployment_url=$(echo "$output" | grep -o 'https://[^[:space:]]*\.vercel\.app[^[:space:]]*' | head -1)
+        inspect_url=$(echo "$output" | grep -o 'https://vercel\.com/[^[:space:]]*' | head -1)
 
         # Set outputs
         echo "deployment-url=$deployment_url" >> $GITHUB_OUTPUT
         echo "inspect-url=$inspect_url" >> $GITHUB_OUTPUT
-
-        # Only exit with error if deployment actually failed (no URLs found)
-        if [ -z "$deployment_url" ] && [ -z "$inspect_url" ]; then
-          echo "Deployment failed - no URLs found"
-          exit 1
-        fi
 
     - name: Deploy to Vercel (production)
       id: deploy-production
       if: ${{ inputs.environment == 'production' }}
       shell: bash
       run: |
-        set +e  # Don't exit on error
-        output=$(pnpm dlx vercel@latest deploy --prebuilt --prod --token "$VERCEL_TOKEN" 2>&1)
-        exit_code=$?
-        set -e  # Re-enable exit on error
-
-        echo "Exit code: $exit_code"
-        echo "Full output:"
+        output=$(pnpm dlx vercel@latest deploy --prebuilt --prod --token "$VERCEL_TOKEN")
         echo "$output"
 
-        # Extract URLs from output - production might use different labels
-        deployment_url=$(echo "$output" | awk '/Preview:/ {print $2}')
-        inspect_url=$(echo "$output" | awk '/Inspect:/ {print $2}')
-
-        # For production, also try to get the production URL from the last line
-        if [ -z "$deployment_url" ]; then
-          deployment_url=$(echo "$output" | grep -E "https://.*\.vercel\.app" | tail -1)
-        fi
-
-        echo "Extracted deployment URL: $deployment_url"
-        echo "Extracted inspect URL: $inspect_url"
+        # Extract URLs from output
+        deployment_url=$(echo "$output" | grep -o 'https://[^[:space:]]*\.vercel\.app[^[:space:]]*' | head -1)
+        inspect_url=$(echo "$output" | grep -o 'https://vercel\.com/[^[:space:]]*' | head -1)
 
         # Set outputs
         echo "deployment-url=$deployment_url" >> $GITHUB_OUTPUT
         echo "inspect-url=$inspect_url" >> $GITHUB_OUTPUT
-
-        # Only exit with error if deployment actually failed (no URLs found)
-        if [ -z "$deployment_url" ] && [ -z "$inspect_url" ]; then
-          echo "Deployment failed - no URLs found"
-          exit 1
-        fi
 
     - name: Comment on PR
       if: ${{ github.event_name == 'pull_request' && inputs.environment != 'production' }}
