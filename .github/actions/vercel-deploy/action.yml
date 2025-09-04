@@ -25,9 +25,15 @@ runs:
       shell: bash
       run: pnpm dlx vercel@latest pull --yes --environment "${{ inputs.environment }}" --token "$VERCEL_TOKEN"
 
-    - name: Build
+    - name: Build (preview)
+      if: ${{ inputs.environment != 'production' }}
       shell: bash
       run: pnpm dlx vercel@latest build --token "$VERCEL_TOKEN"
+
+    - name: Build (production)
+      if: ${{ inputs.environment == 'production' }}
+      shell: bash
+      run: pnpm dlx vercel@latest build --prod --token "$VERCEL_TOKEN"
 
     - name: Deploy to Vercel (preview)
       id: deploy-preview
