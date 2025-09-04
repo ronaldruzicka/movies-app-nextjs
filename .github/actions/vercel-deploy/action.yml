@@ -106,8 +106,8 @@ runs:
 
           const comment = `## 🚀 Deployment Complete
 
-          <a href="${deploymentUrl}" target="_blank">**Preview URL:**</a>
-          <a href="${inspectUrl}" target="_blank">**Inspect:**</a>
+          **Preview URL:** (${deploymentUrl}){:target="_blank" rel="noopener"}
+          **Inspect:** ${inspectUrl}
 
           Deployed from commit: ${context.sha.substring(0, 7)}`;
 
