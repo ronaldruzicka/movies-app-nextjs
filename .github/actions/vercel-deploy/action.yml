@@ -31,7 +31,7 @@ runs:
 
     - name: Deploy to Vercel (preview)
       id: deploy-preview
-      if: ${{ inputs.environment != 'production' }}
+      if: ${{ inputs.environment == 'preview' }}
       shell: bash
       run: |
         output=$(pnpm dlx vercel@latest deploy --prebuilt --token "$VERCEL_TOKEN")
