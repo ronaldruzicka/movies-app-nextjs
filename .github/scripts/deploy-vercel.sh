@@ -25,7 +25,7 @@ echo "$output"
 
 # Extract URLs from output
 preview_url=$(echo "$output" | awk '/Preview:/ {print $2}')
-deployment_url=$(echo "$output" | awk '/Deployment:/ {print $2}')
+deployment_url=$(echo "$output" | awk '/Inspect:/ {print $2}')
 
 # For production, also try to get the production URL from the last line if Preview: not found
 if [ -z "$preview_url" ] && [[ "$1" == "--prod" ]]; then
