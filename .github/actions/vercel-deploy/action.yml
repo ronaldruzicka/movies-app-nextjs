@@ -39,13 +39,13 @@ runs:
       id: deploy-preview
       if: ${{ inputs.environment != 'production' }}
       shell: bash
-      run: ./.github/scripts/deploy-vercel.sh
+      run: bash ./.github/scripts/deploy-vercel.sh
 
     - name: Deploy to Vercel (production)
       id: deploy-production
       if: ${{ inputs.environment == 'production' }}
       shell: bash
-      run: ./.github/scripts/deploy-vercel.sh --prod
+      run: bash ./.github/scripts/deploy-vercel.sh --prod
 
     - name: Comment on PR
       if: ${{ github.event_name == 'pull_request' && inputs.environment != 'production' }}
