@@ -52,13 +52,13 @@ runs:
       uses: actions/github-script@v7
       with:
         script: |
+          const previewUrl = '${{ steps.deploy-preview.outputs.preview-url }}';
           const deploymentUrl = '${{ steps.deploy-preview.outputs.deployment-url }}';
-          const inspectUrl = '${{ steps.deploy-preview.outputs.inspect-url }}';
 
           const comment = `## 🚀 Deployment Complete
 
-          **Preview URL:** ${deploymentUrl}
-          **Deployment details:** ${inspectUrl}
+          **Preview URL:** ${previewUrl}
+          **Deployment details:** ${deploymentUrl}
 
           Deployed from commit: ${context.sha.substring(0, 7)}`;
 
